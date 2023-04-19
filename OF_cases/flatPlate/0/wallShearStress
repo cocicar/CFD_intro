@@ -1,0 +1,54 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  10
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volVectorField;
+    location    "0";
+    object      wallShearStress;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -2 0 0 0 0];
+
+internalField   uniform (0 0 0);
+
+boundaryField
+{
+    INLET
+    {
+        type            calculated;
+        value           uniform (0 0 0);
+    }
+    OUTLET
+    {
+        type            calculated;
+        value           uniform (0 0 0);
+    }
+    TOP
+    {
+        type            calculated;
+        value           uniform (0 0 0);
+    }
+    PLOCHA
+    {
+        type            calculated;
+        value           uniform (0 0 0);
+    }
+    LEADING_EDGE
+    {
+        type            symmetryPlane;
+    }
+    NAPRED_NAZAD
+    {
+        type            empty;
+    }
+}
+
+
+// ************************************************************************* //

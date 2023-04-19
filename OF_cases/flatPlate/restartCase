@@ -1,0 +1,21 @@
+#!/bin/bash
+source /opt/openfoam10/etc/bashrc
+
+echo " 1. Cleaning case"
+foamCleanCase
+rm -rf *.pdf
+
+echo " 2. Generisanje mreze"
+blockMesh > log.blockMesh 
+
+echo " 3. Solving as backround job"
+simpleFoam > log.simpleFoam &
+echo " ---- Job ID: " $!
+sleep 4s
+
+echo " 4. Monitoring reziduala"
+foamMonitor -l -r "2" -s "800,600" postProcessing/residuals/0/residuals.dat & 
+
+echo "--------------------------------------------"
+tail -f log.simpleFoam | grep SIMPLE 
+exit 0
